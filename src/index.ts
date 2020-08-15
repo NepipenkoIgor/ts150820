@@ -1,37 +1,29 @@
-// interface/types/functions/class
-interface IAccount<Info extends { male: boolean }, Id = number> {
-    id: Id;
+// type NotReadonly<T> = {
+//     -readonly [P in keyof T]?: number;
+// }
+//
+// type TAccount = {
+//     readonly  name: string;
+//     readonly  age: number;
+// }
+//
+// let u1: Partial<TAccount> = {
+//     name: 32,
+//     age: 34,
+// }
+// u1.age = 25;
+// keyof T  'name' | 'age'
+
+type Person = {
     name: string;
-    info: Info
+    age: number;
+    info: { male: boolean }
+    subject: string[]
 }
 
-let user: IAccount<{ male: boolean }> = {
-    id: 1,
-    name: 'Ihor',
-    info: {
-        male: true
-    }
-}
+type RemoveByType<T, E> = {
+    [P in keyof T]: E extends T[P] ? never : P
+}[keyof T]
 
-interface IAdminInfo {
-    male: boolean;
-    subjects: string[];
-}
-
-let admin: IAccount<IAdminInfo, string> = {
-    id: 'asdasdasd1231',
-    name: 'Ihor',
-    info: {
-        male: true,
-        subjects: ['ts', 'js']
-    }
-}
-// let a: Array<number> = [1, 2, 3]
-// let c: number = a.pop() as number;
-
-function getProperty<T, K extends keyof T>(obj: T, key: K): T[K] {
-    return obj[key];
-}
-
-const k = 'key1';
-let a: number = getProperty(user, 'info');
+const p: RemoveByType<Person, {male: boolean, salary: number}> = 'name'
+const p1: keyof Person = 'info';
