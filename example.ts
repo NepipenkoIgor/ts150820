@@ -7,10 +7,10 @@ function deliveryMethod() {
 }
 
 function shipWeight() {
-    const el = document.getElementById('weight') as HTMLElement;
-    // if (!el) {
-    //     return 0;
-    // }
+    const el = document.getElementById('weight');
+    if (!el) {
+        return 0;
+    }
     return parseInt(el.innerHTML, 10);
 }
 
