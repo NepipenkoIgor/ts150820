@@ -6,9 +6,9 @@ function deliveryMethod() {
 }
 function shipWeight() {
     var el = document.getElementById('weight');
-    // if (!el) {
-    //     return 0;
-    // }
+    if (!el) {
+        return 0;
+    }
     return parseInt(el.innerHTML, 10);
 }
 function sendUpdates(emailAddr) {
