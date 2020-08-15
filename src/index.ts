@@ -1,62 +1,116 @@
-// const user: {
-//     readonly name: string,
-//     readonly age?: number
-// } = {
-//     name: 'Ihor',
-//     age: 34,
-// };
+/****implementation in class**/
+// interface IX {
+//     x: number;
+// }
 //
-// user.age = 25;
-// user.name = 'Vanya';
+// type IY = {
+//     y: number;
+// }
 //
-//
-// let nameAge: keyof typeof user = 1;
-// let v1: (typeof user)['name'] = 1;
-//
-// let hashMap: {
-//     [id: string]: typeof user;
-// } = {
-//     '1231asdas121':  {
-//         name: 'Ihor',
-//         age: 34,
-//     },
-//     '14564as2355': {
-//         name: 'Vanya',
-//     }
+// class Point implements IX, IY {
+//     x: number = 1;
+//     y: number = 1;
 // }
 
-// let arr: readonly (typeof user)[] = [
-//     {
-//         name: 'Ihor',
-//         age: 34,
-//     },
-//     {
-//         name: 'Ihor',
-//         age: 34,
-//     },
-// ]
+/****Object / Functions**/
+
+// interface IPoint {
+//     x: number;
+//     y: number;
+// }
 //
-// arr[100] = {
-//     name: 'Ihor',
-//     age: 34,
+// type TPoint = {
+//     x: number;
+//     y: number;
+// }
+//
+// let p: TPoint = {
+//     x: 10,
+//     y: 20
+// }
+//
+// interface SetPoint {
+//     (x: number, y: number): number
+// }
+//
+// type spt1 = (x: number, y: number) => number
+// type spt2 = { (x: number, y: number): number }
+//
+// const sp: spt2 = (_a, _b) => {
+//     return 1;
+// }
+// type CB = (x: number, y: number) => number
+//
+// function calc(a: number, b: string, cb: CB) {
+//     return cb(a, Number(b));
+// }
+//
+// function fn(x: number) {
+//     return x;
+// }
+//
+// calc(1, '2', fn);
+
+/**** extends **/
+// type TX = {
+//     x: number;
+// }
+//
+// type TY = {
+//     y: number;
+// }
+//
+// type TP = TX & TY;
+// interface IX {
+//     x: number;
+// }
+//
+// interface IY {
+//     y: number;
+// }
+//
+// interface IPoint extends IX, TY {
+//
+// }
+//
+// type TPoint = TX & IY;
+//
+// let p: TPoint = {
+//     x: 1,
+//     y: 2
+// }
+
+// type TPoint = { x: number };
+// type TPoint = { y: number };
+// type LitType = 'x' | 'y'
+//
+// class Point implements IPoint {
+//     x: number = 1;
+//     y: number = 2;
+// }
+//
+// interface IPoint {
+//     x: number
 // };
-// arr.push({
-//     name: 'Ihor',
-//     age: 34,
-// })
 //
-// let pair: readonly [string, number] = ['id', 1]
 //
-// pair.push(100);
-// pair[100] = 1;
+// interface IPoint {
+//     y: number
+// };
 
-let x = 10 as const;
-x = 10;
+interface User {
+    name: string;
+    surname: string;
 
-let tuple  = ['id', 1] as const;
-tuple = ['id', 1];
-tuple.push(1);
+    getFullName(): string;
+}
 
-let obj = {name: 'Ihor', age: 34} as const
+let u1: User = {
+    name: 'Ihor',
+    surname: 'Nepipenko',
+    getFullName(): string {
+        return `${this.name} ${this.surname}`
+    }
+}
 
-obj = {name: 'Ihor', age: 25};
+type snb = string | number | boolean;
