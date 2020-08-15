@@ -1,0 +1,23 @@
+{
+  "name": "ts150820",
+  "version": "1.0.0",
+  "description": "",
+  "main": "example.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/NepipenkoIgor/ts150820.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/NepipenkoIgor/ts150820/issues"
+  },
+  "homepage": "https://github.com/NepipenkoIgor/ts150820#readme",
+  "dependencies": {
+    "typescript": "^3.9.7"
+  }
+}
