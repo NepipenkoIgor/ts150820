@@ -1,115 +1,184 @@
-// function average(a: number, b: number, c: number): string {
-//     const avg: number = (a + b + c) / 3;
-//     return `Average is ${avg}`;
-// }
-//
-// average();
-// average(1, 2);
-// average('1', 2, '3');
-// average(2, 2, 3, 4);
-// const result: number = average(1, 2, 3);
-
-// function average(a: number, b?: number, c?: number): string {
-//     if (b === undefined) {
-//         b = 0;
+// class Point {
+//     // public readonly x!: number;
+//     // public readonly y!: number;
+//     // public constructor(x: number, y: string);
+//     // public constructor(x: string, y: number);
+//     public constructor(
+//         public readonly x: string | number,
+//         protected readonly y: string | number,
+//         private readonly z: string | number,
+//     ) {
+//         // this.x = x;
+//         // this.y = y;
 //     }
-//     if (c === undefined) {
-//         c = 0;
+//
+//     // public onInit() {
+//     //     this.x = 1;
+//     //     this.y = 2;
+//     // }
+//
+//     public sumCoords(): number {
+//         return Number(this.x) + Number(this.y) + Number(this.z);
 //     }
-//     const avg: number = (a + b + c) / 3;
-//     return `Average is ${avg}`;
 // }
 //
-// average();
-// average(1);
-// average(1, 2);
-// average('1', 2, '3');
-// average(2, 2, 3, 4);
-// const result: number = average(1, 2, 3);
+// const p = new Point(1, '2');
+// const p1 = new Point('1', 2);
 
-// function average(a: number, b: number = 0, c: number = 0): string {
-//     const avg: number = (a + b + c) / 3;
-//     return `Average is ${avg}`;
+// type sn = string | number;
+//
+// interface IX {
+//     readonly  x: sn;
 // }
 //
-// average();
-// average(1);
-// average(1, 2);
-// average('1', 2, '3');
-// average(2, 2, 3,  4);
-// const result: number = average(1, 2, 3);
-// type sn = string | number
-//
-// function isString(item: sn): item is string {
-//     return typeof item === 'string';
+// interface ISum {
+//     sumCoords(): number;
 // }
 //
-// function average(...args: sn[]): string {
-//     let total: number = 0;
-//     for (const arg of args) {
-//         // if (typeof arg === 'string') {
-//         if (isString(arg)) {
-//             total += Number(arg);
-//             continue;
+// class BasePoint {
+//
+//     #e: number
+//
+//     public constructor(
+//         public readonly x: string | number,
+//         protected readonly y: string | number,
+//         private readonly z: string | number,
+//         e: number,
+//     ) {
+//         this.#e = e;
+//     }
+//
+//     public sumCoords(): number {
+//         return Number(this.x) + Number(this.y) + Number(this.z) + Number(this.#e);
+//     }
+// }
+//
+// class Point extends BasePoint implements IX, ISum {
+//     public constructor(x: sn, y: sn, z: sn, e: number) {
+//         super(x, y, z, e);
+//     }
+// }
+//
+// const p = new Point(1, 1, 2, 3);
+
+//
+// class Singleton {
+//     private static _instance: Singleton;
+//
+//     private constructor() {
+//     }
+//
+//     public static get instance(): Singleton {
+//         if (!Singleton._instance) {
+//             Singleton._instance = new Singleton();
 //         }
-//         total += arg;
+//         return Singleton._instance;
 //     }
-//     const avg: number = total / args.length;
-//     return `Average is ${avg}`;
 // }
 //
-// average();
-// average(1);
-// average(1, 2);
-// average('1', 2, '3');
-// average(2, 2, 3, 4);
-// const result: number = average(1, 2, 3);
+// const inst1 = Singleton.instance;
+// const inst2 = Singleton.instance;
+// const inst3 = Singleton.instance;
+// const inst4 = Singleton.instance;
+// const inst5 = Singleton.instance;
+//
+// console.log(inst1 === inst5);
+// console.log(inst3 === inst4);
 
-// let a: IUser | null
-
-// interface Options {
-//     [key: string]: number | string | boolean | object
+// type Constructable = new (...args: any[]) => any;
+//
+// function Timestamped<BaseClass extends Constructable>(BC: BaseClass) {
+//     return class extends BC {
+//         public timestamp = new Date();
+//     }
 // }
 //
-// let opts: Options = {
-//     key1: 1,
-// }
-// let poll: Options = {}; // object of key:string, val: number|string|date|boolean|object
-// for (const key in opts) {
-//     if (key === 'notApoll') {
-//         continue
+// function Tagged<BaseClass extends Constructable>(BC: BaseClass) {
+//     return class extends BC {
+//         public tags = ['ts', 'js'];
 //     }
-//     poll[key] = opts[key]
 // }
-type sn = string | number
+//
+// class Subject {
+//     public constructor(
+//         public readonly teacher: string
+//     ) {
+//     }
+// }
+//
+// class User extends Timestamped(Tagged(Subject)) {
+//
+// }
+//
+// let u = new User('Ihor Nepipenko');
+// console.log(u.tags);
+// console.log(u.timestamp);
+// console.log(u.teacher);
 
-function isString(item: sn): item is string {
-    return typeof item === 'string';
-}
 
-export function average(a: string, b: number): string;
-export function average(a: number, b: string): string;
-export function average(a: number, b: number, c: number): string;
-export function average(...args: sn[]): string {
-    let total: number = 0;
-    for (const arg of args) {
-        // if (typeof arg === 'string') {
-        if (isString(arg)) {
-            total += Number(arg);
-            continue;
-        }
-        total += arg;
-    }
-    const avg: number = total / args.length;
-    return `Average is ${avg}`;
-}
+// abstract class AbstractControl<T> {
+//     public abstract model: T[];
+//
+//     public abstract getValue(): T[];
+//
+//     public onFocus() {
+//
+//     }
+//
+//     public onBlur() {
+//
+//     }
+// }
+//
+// class MHDropDown extends AbstractControl<{ name: string, value: string }> {
+//     public model = [];
+//
+//     public getValue(): { name: string; value: string }[] {
+//         return [];
+//     }
+// }
 
-// average();
-// average(1);
-// average(1, 2);
-// average(1, '2');
-// average('1', 2);
-// average('1', 2, '3');
-// average(3, 2, 3);
-// average(2, 2, 3, 4);
-// const result: number = average(1, 2, 3);
+// class C {
+//     doSome1(): this {
+//         return this;
+//     }
+//
+//     doSome2(): this {
+//         return this;
+//     }
+// }
+//
+// let c = new C();
+// c.doSome1().doSome2();
+
+// function getFullName(this: { name: string, surname: string }) {
+//     return `${this.name} ${this.surname}`
+// }
+//
+// let account = {
+//     name: 'Ihor',
+//     surname: 'Nepipenko',
+//     getFullName
+// }
+//
+// const fullName = account.getFullName();
+//
+//
+// class UIElement {
+//     public addClickListener(_onclick: (this: this, event: Event) => void) {
+//
+//     }
+// }
+//
+// class Handler {
+//     info: string = '';
+//
+//     onClick(this: this, _e: Event) {
+//         this.info = 'some text';
+//     }
+// }
+//
+// const h = new Handler();
+// const el = new UIElement();
+//
+// el.addClickListener(h.onClick)
