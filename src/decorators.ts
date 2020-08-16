@@ -1,3 +1,5 @@
+import 'reflect-metadata'
+
 export function LogEvent(
     _target: object,
     _key: string,
@@ -74,5 +76,22 @@ export function SavePersistence(target: any, key: string) {
         set: setter,
         enumerable: true,
         configurable: true
+    })
+};
+
+export function CheckTypeInRuntime(target: any, key: string) {
+    const {name: type} = Reflect.getMetadata('design:type', target, key)
+    let value: any;
+    Object.defineProperty(target, key, {
+        get() {
+            return value;
+        },
+        set(newValue: any) {
+            const realType = typeof newValue;
+            if (realType !== type.toLowerCase()) {
+                throw new Error(`type of ${key} is not ${type}. You tried to assign ${realType}`)
+            }
+            value = newValue;
+        }
     })
 };
