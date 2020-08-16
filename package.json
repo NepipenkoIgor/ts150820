@@ -25,7 +25,10 @@
     "typescript": "^3.9.7"
   },
   "devDependencies": {
+    "@types/jquery": "^3.5.1",
+    "css-loader": "^4.2.1",
     "html-webpack-plugin": "^4.3.0",
+    "style-loader": "^1.2.1",
     "ts-loader": "^8.0.2",
     "tslib": "^2.0.1",
     "webpack": "^4.44.1",
