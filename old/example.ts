@@ -23,7 +23,8 @@ function sendUpdates(emailAddr: string | string[]) {
         }
     }
 
-    if (Array.isArray(emailAddr)) {
+    // if (Array.isArray(emailAddr)) {
+    if (emailAddr instanceof Array) {
         emailAddr.forEach((val) => {
             sendEmail(val.trim());
         });
